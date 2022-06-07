@@ -50,3 +50,35 @@ INSERT INTO customer VALUES (1003,'RamPrasad','JM','M',50000,'Europe',37,'997090
  
  
 SELECT * FROM customer;
+
+INSERT INTO customer(custid,fname,lname,gender,amount,registered_date) VALUES(1004,'Durga','Devi','F',300000,current_date());
+INSERT INTO customer(custid,fname,lname,gender,amount,city,age,mobile,registered_date) 
+ VALUES (1005,'Venkatesh','N','M',1000000,'Pune',47,'9970901112','2000-01-01');
+ 
+ INSERT INTO customer(custid,fname,lname,gender,amount,city,age,mobile,registered_date) 
+ VALUES (1005,'Venkatesh','N','M',1000000,'Pune',47,'9970901113','2000-01-01');
+ 
+ 
+ 
+ SELECT fname,lname,city,amount FROM CUSTOMER;
+ 
+ SELECT * FROM customer WHERE city='Chennai';
+SELECT * FROM customer WHERE gender='M';
+SELECT * FROM customer WHERE gender='F';
+
+SELECT * FROM customer;
+
+
+SELECT * FROM customer WHERE amount >20000 AND age<40 and city != 'Europe';
+
+
+-- UPDATE THE DATA USING UPDATE QUERY
+SET sql_safe_updates=0;
+
+UPDATE CUSTOMER SET city='kolkatta'  WHERE custid=1004;
+
+UPDATE customer SET amount=10000000 ;
+
+UPDATE customer SET amount=amount*2 WHERE registered_date<='2000-01-01';
+
+UPDATE customer SET amount=6666666 ,  city='NEWYORK' WHERE registered_date>='2022-01-01';
