@@ -70,5 +70,32 @@ ALTER TABLE customer MODIFY mobile varchar(15);
 ALTER TABLE CUSTOMER RENAME COLUMN amount TO salary;
 ALTER TABLE user_tbl RENAME TO user_table;
 
-UPDATE customer SET pincode='850005' WHERE custid=1002;
+UPDATE customer SET country='AUSTRALIA'; -- WHERE custid=1002;
 SELECT * FROM customer;
+
+-- CONSTRAINTS
+/*
+UNIQUE
+NOT NULL
+PRIMARY KEY
+FOREIGN KEY
+CHECK
+DEFAULT 
+*/
+
+-- UNIQUE CONSTRAINTS
+
+CREATE TABLE unique_tbl(
+custid INT UNIQUE,
+cust_name VARCHAR(50),
+age int);
+
+DESC unique_tbl;
+
+INSERT INTO unique_tbl VALUES(1000,'Raghul Ramesh',37);
+
+SELECT * FROM unique_tbl;
+INSERT INTO unique_tbl VALUES(1001,'Raghul Ramesh',37);
+INSERT INTO unique_tbl VALUES(1002,'Malini Ramesh',35);
+INSERT INTO unique_tbl(cust_name, age) VALUES('Shivani K',11);
+INSERT INTO unique_tbl(cust_name, age) VALUES('Harsha K',7);
