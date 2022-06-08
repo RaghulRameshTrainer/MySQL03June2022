@@ -87,8 +87,8 @@ DEFAULT
 
 CREATE TABLE unique_tbl(
 custid INT UNIQUE,
-cust_name VARCHAR(50),
-age int);
+cust_name VARCHAR(50) ,
+age int );
 
 DESC unique_tbl;
 
@@ -98,4 +98,6 @@ SELECT * FROM unique_tbl;
 INSERT INTO unique_tbl VALUES(1001,'Raghul Ramesh',37);
 INSERT INTO unique_tbl VALUES(1002,'Malini Ramesh',35);
 INSERT INTO unique_tbl(cust_name, age) VALUES('Shivani K',11);
-INSERT INTO unique_tbl(cust_name, age) VALUES('Harsha K',7);
+INSERT INTO unique_tbl(cust_name, age) VALUES('Harsha K',7);    
+
+-- 
