@@ -35,11 +35,11 @@ SELECT * FROM customer_data;
 
 
 CREATE TABLE customer_data_2(
-custid INT ,        -- Simple primary  , Will create a index automatically
+custid INT ,        -- composite primary  , Will create a index automatically
 cust_name VARCHAR(50) ,
 age int,
 mobile VARCHAR(20) ,
-constraint cust_primary_key PRIMARY KEY(custid, mobile));
+constraint abc PRIMARY KEY(custid, mobile));
 
 
 INSERT INTO customer_data_2 VALUES(1000,'Venkatesh M',50,'8939945656');
@@ -48,3 +48,22 @@ INSERT INTO customer_data_2 VALUES(1001,'Venkatesh M',50,'8939945657');
 INSERT INTO customer_data_2 VALUES(1001,'Venkatesh M',50,'8939945657');  -- Error
 
 SELECT * FROM customer_data_2;
+
+-- FOREIGN KEY ( REFERENCE KEY)
+
+CREATE TABLE transacation(
+transid INT PRIMARY KEY,
+custid INT ,
+product VARCHAR(50),
+amount DECIMAL(20,2),
+FOREIGN KEY (custid) REFERENCES customer_data_2(custid)
+);
+
+SELECT * FROM customer_data_2;
+
+INSERT INTO transacation VALUES(100,1000,'Mobile',120000);
+
+SELECT * FROM transacation;
+INSERT INTO transacation VALUES(101,1001,'TV',70000);
+INSERT INTO transacation VALUES(101,1002,'Laptop',110000);  -- Error
+
