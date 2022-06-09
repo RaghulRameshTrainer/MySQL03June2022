@@ -54,9 +54,10 @@ SELECT * FROM customer_data_2;
 CREATE TABLE transacation(
 transid INT PRIMARY KEY,
 custid INT ,
+mobile VARCHAR(20),
 product VARCHAR(50),
 amount DECIMAL(20,2),
-FOREIGN KEY (custid) REFERENCES customer_data_2(custid)
+FOREIGN KEY (custid,mobile) REFERENCES customer_data_2(custid,mobile)
 );
 
 SELECT * FROM customer_data_2;
@@ -66,4 +67,50 @@ INSERT INTO transacation VALUES(100,1000,'Mobile',120000);
 SELECT * FROM transacation;
 INSERT INTO transacation VALUES(101,1001,'TV',70000);
 INSERT INTO transacation VALUES(101,1002,'Laptop',110000);  -- Error
+
+
+-- CHECK coonstraints
+
+CREATE TABLE check_tbl (
+custid INT PRIMARY KEY,
+custname VARCHAR(100) NOT NULL,
+mobile VARCHAR(20) UNIQUE,
+age INT CHECK (age > 0 and age <=100)
+);
+
+INSERT INTO check_tbl VALUES(1000,'Raghul Ramesh','9894851511',37);
+INSERT INTO check_tbl VALUES(1002,'Raghul Ramesh','9894851513',100);
+
+SELECT * FROM check_tbl;
+
+
+CREATE TABLE check_tbl_2 (
+custid INT PRIMARY KEY,
+custname VARCHAR(100) NOT NULL,
+mobile VARCHAR(20) UNIQUE,
+age INT CHECK (age > 0 and age <=100),
+country VARCHAR(30) CHECK ( country IN ('India','Singapore','Canada','Australia','USA'))
+);
+
+
+INSERT INTO check_tbl_2 VALUES(1000,'Kalahasan','9898378790',70,'India');
+SELECT * FROM check_tbl_2;
+
+
+-- DEFAULT constraint
+
+CREATE TABLE default_tbl(
+custid INT PRIMARY KEY,
+custname VARCHAR(100) NOT NULL,
+mobile VARCHAR(20) UNIQUE,
+country VARCHAR(20) DEFAULT 'JAPAN'
+);
+
+INSERT INTO default_tbl(custid, custname, mobile) VALUES(1,'Tharani','9898767899');
+INSERT INTO default_tbl VALUES(2,'Siva','9898767891','Bangaladesh');
+
+SELECT * FROM default_tbl;
+
+SELECT COUNT(*) FROM default_tbl;
+
 
