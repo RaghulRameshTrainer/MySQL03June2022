@@ -1,0 +1,74 @@
+-- sub query (QUERY within a QUERY is called suv query)
+
+SELECT * FROM CUSTOMER;
+update customer set custid=1001 WHERE custid=1000;
+
+SELECT fname,lname,city from customer where age <40;
+
+-- GET THE CUSTOMERS NAME WHO IS FROM NEWYORK AND REGISTERED BEFORE END OF JAN 2022
+
+SELECT * FROM CUSTOMER WHERE registered_date = (
+SELECT registered_date FROM CUSTOMER WHERE CITY='NEWYORK' AND registered_date<'2022-01-31');
+
+SELECT * FROM CUSTOMER WHERE CITY='NEWYORK' AND registered_date<'2022-01-31';
+
+
+SELECT * FROM transacation;
+SET sql_safe_updates=0;
+
+SELECT * FROM CUSTOMER 
+WHERE custid=(
+SELECT custid FROM transacation WHERE product='tv');
+
+
+--- GROUP BY , HAVING, ORDER BY 
+
+SELECT SUM(salary) FROM CUSTOMER;
+
+SELECT fname, lname FROM CUSTOMER WHERE
+salary=(SELECT MAX(salary) FROM CUSTOMER);
+
+SELECT fname, lname FROM CUSTOMER WHERE
+SALARY=(SELECT MIN(SALARY) FROM CUSTOMER);
+
+SELECT count(*) FROM CUSTOMER WHERE CITY='NEWYORK';
+SELECT avg(salary) FROM CUSTOMER ;
+
+-- COUNT, MIN, MAX, SUM, AVG
+
+
+SELECT * FROM CUSTOMER;
+
+SELECT * FROM CUSTOMER WHERE CITY='NEWYORK' AND AGE <= 35;
+SELECT * FROM CUSTOMER WHERE CITY='NEWYORK' OR AGE <= 35;
+
+SELECT * FROM CUSTOMER WHERE CITY IN (
+SELECT city FROM CUSTOMER WHERE AGE>35);
+
+SELECT city FROM CUSTOMER WHERE AGE>35;
+
+SELECT * FROM CUSTOMER WHERE AGE != 35;
+
+SELECT * FROM CUSTOMER;
+
+SELECT city,  sum(salary)
+FROM CUSTOMER    
+WHERE registered_date <= '2023-01-01'
+GROUP BY city
+HAVING sum(salary) > 11333399.00
+ ORDER BY CITY DESC;
+
+
+UPDATE CUSTOMER SET gender='F' WHERE CUSTID IN (1001,1005);
+
+INSERT INTO CUSTOMER VALUES(1005,'Malini','Sekar','F',1000000,'NEWYORK',30,'8723878787',current_date(),'AUSTRALIA');
+INSERT INTO CUSTOMER VALUES(1006,'Ashwin','Sekar','M',1000000,'NEWYORK',22,'8723878786',current_date(),'AUSTRALIA');
+
+
+INSERT INTO CUSTOMER VALUES(1005,'Tharani','Sekar','F',1000000,'Pune',30,'8723878787',current_date(),'AUSTRALIA');
+INSERT INTO CUSTOMER VALUES(1006,'Viknesh','Sekar','M',1000000,'Pune',22,'8723878786',current_date(),'AUSTRALIA');
+
+
+SELECT city, gender, sum(salary), avg(salary), min(salary), max(salary) from customer
+group by city, gender;
+
